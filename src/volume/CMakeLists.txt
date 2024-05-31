@@ -1,2 +1,4 @@
 add_library(volume
-    file.c file.h)
+    file.c file.h
+        volume.c
+        volume.h)
