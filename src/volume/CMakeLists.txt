@@ -1,2 +1,2 @@
-add_library(file
+add_library(volume
     file.c file.h)
