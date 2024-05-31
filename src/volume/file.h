@@ -8,16 +8,23 @@
 #include <stddef.h>
 #include <sys/types.h>
 
+#include "utils/vector.h"
+
 struct file
 {
     char name[FILE_NAME_SIZE];
     size_t size;
+    size_t offset;
     char owner[OWNER_NAME_SIZE];
     bool is_dir;
+    struct vector *children;
 };
 
-struct file *file_create(const char *name, size_t size, const char *owner,
-                         bool is_dir);
+struct file *file_create(const char *name, size_t size, size_t offset,
+                         const char *owner, bool is_dir);
+const struct file *file_addchild(struct file *parent, const struct file *child);
+bool file_delchild(struct file *parent, size_t index);
+bool file_isreg(const struct file *file);
 void file_free(struct file *file);
 
 #endif // FILE_H
