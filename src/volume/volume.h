@@ -13,6 +13,7 @@ struct volume
 };
 
 struct volume *volume_create(const char *version, size_t capacity);
+size_t volume_size(const struct volume *vol);
 void volume_free(struct volume *vol);
 
 #endif // VOLUME_H
