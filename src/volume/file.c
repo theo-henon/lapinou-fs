@@ -39,6 +39,31 @@ bool file_isreg(const struct file *file)
     return !file->is_dir;
 }
 
+size_t file_nodec(const struct file *file)
+{
+    if (file == NULL)
+        return 0;
+
+    size_t count = 1;
+    if (file->is_dir && file->children != NULL)
+        for (size_t i = 0; i < file->children->size; i++)
+            count += file_nodec(vector_get(file->children, i));
+    return count;
+}
+
+size_t file_recsize(const struct file *file)
+{
+    if (file == NULL)
+        return 0;
+    if (!file->is_dir)
+        return file->size;
+
+    size_t size = 0;
+    for (size_t i = 0; i < file->children->size; i++)
+        size += file_recsize(vector_get(file->children, i));
+    return size;
+}
+
 void file_free(struct file *file)
 {
     vector_free(file->children);

@@ -25,6 +25,8 @@ struct file *file_create(const char *name, size_t size, size_t offset,
 const struct file *file_addchild(struct file *parent, const struct file *child);
 bool file_delchild(struct file *parent, size_t index);
 bool file_isreg(const struct file *file);
+size_t file_nodec(const struct file *file);
+size_t file_recsize(const struct file *file);
 void file_free(struct file *file);
 
 #endif // FILE_H
