@@ -3,5 +3,6 @@ target_sources(lfs PUBLIC
 
 add_subdirectory(utils)
 add_subdirectory(volume)
+add_subdirectory(io)
 
-target_link_libraries(lfs PRIVATE utils volume)
+target_link_libraries(lfs PRIVATE utils volume io)
