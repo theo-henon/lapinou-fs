@@ -7,7 +7,7 @@ bool volume_write(const struct volume *vol, FILE *out)
     fprintf(out, "%020zu", file_nodec(vol->root));
     const int n = 512 - (VOLUME_VERSION_SIZE + 40);
     for (int i = 0; i < n; i++)
-        fputc('0', out);
+        fputc('\0', out);
 
     return true;
 }
