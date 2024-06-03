@@ -6,6 +6,7 @@
 int main(void)
 {
     struct volume *vol = volume_create("lfsv1.00", 8192);
+    file_addchild(vol->root, file_create("first_file", 0, 0, "me", false));
 
     FILE *vol_file = fopen("volume.lfs", "w+");
     volume_write(vol, vol_file);
