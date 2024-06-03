@@ -8,8 +8,12 @@ struct vector *vector_create(size_t capacity, size_t elt_size)
     struct vector *vec = calloc(1, sizeof(struct vector));
     if (vec != NULL)
     {
-        vec->capacity = capacity;
         vec->elt_size = elt_size;
+        if (!vector_resize(vec, capacity))
+        {
+            free(vec);
+            return NULL;
+        }
     }
     return vec;
 }
@@ -31,11 +35,11 @@ bool vector_resize(struct vector *vec, size_t capacity)
 bool vector_pushback(struct vector *vec, const void *elt)
 {
     if (vec->size >= vec->capacity)
-        if (vector_resize(vec, vec->capacity * 2))
+        if (!vector_resize(vec, vec->capacity * 2))
             return false;
 
     char *bytes = vec->data;
-    memcpy(&bytes[vec->size * vec->elt_size - 1], elt, vec->elt_size);
+    memcpy(&bytes[vec->size * vec->elt_size], elt, vec->elt_size);
     vec->size++;
     return true;
 }
