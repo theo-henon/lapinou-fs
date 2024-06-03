@@ -5,6 +5,7 @@
 
 #include "volume/volume.h"
 
+struct file *file_mdread(FILE *in);
 struct volume *volume_read(FILE *in);
 
 #endif // INPUT_H
