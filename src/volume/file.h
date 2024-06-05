@@ -22,7 +22,7 @@ struct file
 
 struct file *file_create(const char *name, size_t size, size_t offset,
                          const char *owner, bool is_dir);
-const struct file *file_addchild(struct file *parent, const struct file *child);
+const struct file *file_addchild(struct file *parent, struct file *child);
 bool file_delchild(struct file *parent, size_t index);
 bool file_isreg(const struct file *file);
 size_t file_nodec(const struct file *file);

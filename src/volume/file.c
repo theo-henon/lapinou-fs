@@ -14,7 +14,7 @@ struct file *file_create(const char *name, size_t size, size_t offset,
         file->offset = offset;
         strncpy(file->owner, owner, OWNER_NAME_SIZE);
         file->is_dir = is_dir;
-        file->children = vector_create(1, sizeof(struct file));
+        file->children = vector_create(1, sizeof(struct file *));
     }
     return file;
 }
@@ -24,12 +24,12 @@ bool file_delchild(struct file *parent, size_t index)
     return vector_pop(parent->children, index);
 }
 
-const struct file *file_addchild(struct file *parent, const struct file *child)
+const struct file *file_addchild(struct file *parent, struct file *child)
 {
     if (file_isreg(parent))
         return NULL;
 
-    if (vector_pushback(parent->children, child))
+    if (vector_pushback(parent->children, &child))
         return child;
     return NULL;
 }
