@@ -4,3 +4,5 @@ add_library(volume
         volume.h)
 
 target_link_libraries(volume PRIVATE utils)
+
+add_subdirectory(tests)
