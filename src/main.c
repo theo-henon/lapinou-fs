@@ -14,7 +14,7 @@ static void file_print(const struct file *file, unsigned depth)
 
     printf("%zu\n", file->children->size);
     for (size_t i = 0; i < file->children->size; i++)
-        file_print(vector_get(file->children, i), depth + 1);
+        file_print(file_getchild(file, i), depth + 1);
 }
 
 int main(void)

@@ -14,7 +14,7 @@ bool file_mdwrite(const struct file *file, FILE *out)
 
 
     for (size_t i = 0; i < file->children->size; i++)
-        file_mdwrite(vector_get(file->children, i), out);
+        file_mdwrite(file_getchild(file, i), out);
     return true;
 }
 

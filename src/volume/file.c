@@ -34,6 +34,11 @@ const struct file *file_addchild(struct file *parent, struct file *child)
     return NULL;
 }
 
+const struct file *file_getchild(const struct file *parent, size_t index)
+{
+    return vector_get(parent->children, index);
+}
+
 bool file_isreg(const struct file *file)
 {
     return !file->is_dir;
